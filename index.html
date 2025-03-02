@@ -1,11 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chúc Mừng Sinh Nhật</title>
+    <style>
+        /* Toàn bộ trang chiếm toàn bộ màn hình */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffeb3b;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Thiết kế văn bản */
+        .message {
+            font-size: 50px;
+            font-weight: bold;
+            color: #d32f2f;
+            text-align: center;
+            animation: slideIn 2s ease-out, bounce 2s infinite;
+        }
+
+        /* Hiệu ứng di chuyển văn bản từ bên trái */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Hiệu ứng nhảy */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        /* Hiệu ứng ánh sáng chớp chớp */
+        .message::before {
+            content: '🎉🎂';
+            font-size: 100px;
+            position: absolute;
+            top: -120px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+    </style>
 </head>
 <body>
-    Nguyễn Minh Đức
+    <div class="message">
+        Chúc Mừng Sinh Nhật! 🎉🎂
+    </div>
 </body>
 </html>
