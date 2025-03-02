@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng Sinh Nhật</title>
+    <title>Chúc Mừng Ngày 8/3</title>
     <style>
-        /* Toàn bộ trang chiếm toàn bộ màn hình */
         body, html {
             margin: 0;
             padding: 0;
@@ -13,64 +12,77 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffeb3b;
-            font-family: 'Arial', sans-serif;
+            background-color: #ffaad4;
             overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
-
-        /* Thiết kế văn bản */
         .message {
-            font-size: 50px;
+            font-size: 3rem;
+            color: #fff;
             font-weight: bold;
-            color: #d32f2f;
             text-align: center;
-            animation: slideIn 2s ease-out, bounce 2s infinite;
+            animation: slide 3s ease-in-out infinite, fadeIn 2s forwards;
         }
-
-        /* Hiệu ứng di chuyển văn bản từ bên trái */
-        @keyframes slideIn {
+        .message span {
+            display: block;
+            animation: bounce 1s infinite;
+        }
+        @keyframes slide {
             0% {
-                transform: translateX(-100%);
+                transform: translateY(-100%);
+            }
+            50% {
+                transform: translateY(0);
             }
             100% {
-                transform: translateX(0);
+                transform: translateY(-100%);
             }
         }
-
-        /* Hiệu ứng nhảy */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
         @keyframes bounce {
             0%, 100% {
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-30px);
+                transform: translateY(-20px);
             }
         }
-
-        /* Hiệu ứng ánh sáng chớp chớp */
-        .message::before {
-            content: '🎉🎂';
-            font-size: 100px;
+        .flower {
             position: absolute;
-            top: -120px;
-            animation: pulse 1s ease-in-out infinite;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://www.pngitem.com/pimgs/m/109-1095764_transparent-rose-flower-clipart-free-download-flower-png.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float 5s infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-                transform: scale(1);
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
             }
             50% {
-                opacity: 1;
-                transform: scale(1.2);
+                transform: translate(-50%, -60%) rotate(180deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
             }
         }
     </style>
 </head>
 <body>
     <div class="message">
-        Chúc Mừng 8/3 Nguyễn Minh Tiến ! 🎉🎂
+        <span>Chúc Mừng Ngày 8/3!</span>
+        <span>Happy Women's Day!</span>
     </div>
-</body>fdfd
+    <div class="flower"></div>
+</body>
 </html>
