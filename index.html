@@ -3,64 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng 8/3 Phạm Thư</title>
+    <title>Chúc Mừng Năm Mới</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
-            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            text-align: center;
+            height: 100vh;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         .message {
-            font-size: 3rem;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .flower {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/6/6d/Red_rose.svg');
-            background-size: cover;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            from { transform: translateY(-10vh) rotate(0deg); }
-            to { transform: translateY(100vh) rotate(360deg); }
+            text-align: center;
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 0 0 10px gold, 0 0 20px red;
         }
     </style>
 </head>
 <body>
-    <div class="message">Chúc Mừng Ngày 8/3, Phạm Thư. Chúc bạn không chỉ ngày này mà ngày nào cũng luôn rạng rỡ nha ! ❤️</div>
+    <canvas id="fireworks"></canvas>
+    <div class="message">Chúc Mừng Năm Mới 2025!</div>
     <script>
-        function createFlower() {
-            const flower = document.createElement("div");
-            flower.classList.add("flower");
-            document.body.appendChild(flower);
-            
-            let left = Math.random() * 100;
-            let duration = Math.random() * 5 + 3;
-            let size = Math.random() * 20 + 10;
-            
-            flower.style.left = left + "vw";
-            flower.style.animationDuration = duration + "s";
-            flower.style.width = size + "px";
-            flower.style.height = size + "px";
-            
-            setTimeout(() => { flower.remove(); }, duration * 1000);
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Firework {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.particles = [];
+                for (let i = 0; i < 50; i++) {
+                    this.particles.push({
+                        x: this.x,
+                        y: this.y,
+                        speed: Math.random() * 5 + 2,
+                        angle: Math.random() * Math.PI * 2,
+                        life: Math.random() * 30 + 30,
+                    });
+                }
+            }
+            update() {
+                this.particles.forEach((p) => {
+                    p.x += Math.cos(p.angle) * p.speed;
+                    p.y += Math.sin(p.angle) * p.speed;
+                    p.speed *= 0.96;
+                    p.life -= 1;
+                });
+                this.particles = this.particles.filter((p) => p.life > 0);
+            }
+            draw() {
+                this.particles.forEach((p) => {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
         }
-        setInterval(createFlower, 300);
+        
+        let fireworks = [];
+        function animate() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((fw) => {
+                fw.update();
+                fw.draw();
+            });
+            fireworks = fireworks.filter((fw) => fw.particles.length > 0);
+            if (Math.random() < 0.05) {
+                fireworks.push(new Firework(Math.random() * canvas.width, Math.random() * canvas.height * 0.5, `hsl(${Math.random() * 360}, 100%, 60%)`));
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
