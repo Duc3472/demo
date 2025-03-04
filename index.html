@@ -6,45 +6,56 @@
     <title>Chúc Mừng Sinh Nhật</title>
     <style>
         body {
-            text-align: center;
-            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            margin: 0;
             overflow: hidden;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
+            flex-direction: column;
+            position: relative;
         }
         .birthday-text {
-            font-size: 50px;
+            font-size: 60px;
             font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 10px black;
-            margin-top: 50px;
+            color: yellow;
+            text-shadow: 2px 2px 20px white;
+            position: absolute;
+            top: 10%;
         }
         .image-container img {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             border: 5px solid white;
-            margin-top: 20px;
+            z-index: 10;
         }
         .balloon {
             position: absolute;
             bottom: -100px;
             width: 50px;
             height: 70px;
-            background-color: red;
             border-radius: 50% 50% 50% 50%;
-            animation: float 5s linear infinite;
+            animation: float 6s linear infinite;
         }
         @keyframes float {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
     </style>
 </head>
 <body>
     <div class="birthday-text">Chúc Mừng Sinh Nhật!</div>
     <div class="image-container">
-        <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/434658385_403646719039440_8138316126756772647_n.jpg" alt="Ảnh Chúc Mừng">
+        <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/480933179_1327395155120133_2150115346391278092_n.jpg" alt="Ảnh Chúc Mừng">
     </div>
+    <canvas id="fireworks"></canvas>
     <script>
         function createBalloon() {
             const balloon = document.createElement("div");
@@ -52,9 +63,59 @@
             document.body.appendChild(balloon);
             balloon.style.left = Math.random() * window.innerWidth + "px";
             balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-            setTimeout(() => balloon.remove(), 5000);
+            setTimeout(() => balloon.remove(), 6000);
         }
         setInterval(createBalloon, 500);
+
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function Firework(x, y) {
+            this.x = x;
+            this.y = y;
+            this.particles = [];
+            for (let i = 0; i < 30; i++) {
+                this.particles.push({
+                    x: this.x,
+                    y: this.y,
+                    vx: Math.cos((Math.PI * 2 * i) / 30) * Math.random() * 4,
+                    vy: Math.sin((Math.PI * 2 * i) / 30) * Math.random() * 4,
+                    alpha: 1
+                });
+            }
+        }
+        Firework.prototype.update = function() {
+            this.particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+            });
+        };
+        Firework.prototype.draw = function() {
+            this.particles.forEach(p => {
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = "yellow";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        };
+        let fireworks = [];
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((fw, i) => {
+                fw.update();
+                fw.draw();
+                if (fw.particles.every(p => p.alpha <= 0)) fireworks.splice(i, 1);
+            });
+            requestAnimationFrame(loop);
+        }
+        canvas.addEventListener("click", e => {
+            fireworks.push(new Firework(e.clientX, e.clientY));
+        });
+        loop();
     </script>
 </body>
 </html>
