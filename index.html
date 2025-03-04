@@ -3,86 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng Ngày 8/3</title>
+    <title>Chúc Mừng 8/3 Phạm Thư</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffaad4;
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
+            text-align: center;
         }
         .message {
             font-size: 3rem;
-            color: #fff;
+            color: white;
+            font-family: 'Arial', sans-serif;
             font-weight: bold;
-            text-align: center;
-            animation: slide 3s ease-in-out infinite, fadeIn 2s forwards;
-        }
-        .message span {
-            display: block;
-            animation: bounce 1s infinite;
-        }
-        @keyframes slide {
-            0% {
-                transform: translateY(-100%);
-            }
-            50% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-100%);
-            }
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 3s ease-in-out;
         }
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
         .flower {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 150px;
-            background-image: url('./static/IMG_0991.JPG');
-            background-size: contain;
-            background-repeat: no-repeat;
-            animation: float 5s infinite;
+            width: 30px;
+            height: 30px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/6/6d/Red_rose.svg');
+            background-size: cover;
+            animation: fall linear infinite;
         }
-        @keyframes float {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            50% {
-                transform: translate(-50%, -60%) rotate(180deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+        @keyframes fall {
+            from { transform: translateY(-10vh) rotate(0deg); }
+            to { transform: translateY(100vh) rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="message">
-        <span>Chúc Mừng Ngày 8/3!</span>
-        <span>Happy Women's Day!</span>
-    </div>
-    <div class="flower"></div>
+    <div class="message">Chúc Mừng Ngày 8/3, Phạm Thư. Chúc bạn không chỉ ngày này mà ngày nào cũng luôn rạng rỡ nha ! ❤️</div>
+    <script>
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            document.body.appendChild(flower);
+            
+            let left = Math.random() * 100;
+            let duration = Math.random() * 5 + 3;
+            let size = Math.random() * 20 + 10;
+            
+            flower.style.left = left + "vw";
+            flower.style.animationDuration = duration + "s";
+            flower.style.width = size + "px";
+            flower.style.height = size + "px";
+            
+            setTimeout(() => { flower.remove(); }, duration * 1000);
+        }
+        setInterval(createFlower, 300);
+    </script>
 </body>
 </html>
