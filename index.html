@@ -3,86 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng Năm Mới</title>
+    <title>Chúc Mừng Sinh Nhật</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
             text-align: center;
-            background: url('https://ephemeral-biscochitos-ec9d32.netlify.app/static/z5576592579608_af2ea313e4ca7faa1192adb3ef51179b.jpg') no-repeat center center/cover;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            height: 100vh;
         }
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .birthday-text {
             font-size: 50px;
             font-weight: bold;
-            color: gold;
-            text-shadow: 3px 3px 5px red;
+            color: white;
+            text-shadow: 2px 2px 10px black;
+            margin-top: 50px;
+        }
+        .image-container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-top: 20px;
+        }
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50% 50% 50% 50%;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <canvas id="fireworks"></canvas>
-    <div class="message">Chúc Mừng Năm Mới!</div>
+    <div class="birthday-text">Chúc Mừng Sinh Nhật!</div>
+    <div class="image-container">
+        <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/434658385_403646719039440_8138316126756772647_n.jpg" alt="Ảnh Chúc Mừng">
+    </div>
     <script>
-        const canvas = document.getElementById("fireworks");
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        let particles = [];
-        class Particle {
-            constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 5 + 2;
-                this.speedX = (Math.random() - 0.5) * 6;
-                this.speedY = (Math.random() - 0.5) * 6;
-                this.color = color;
-                this.life = 50;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.life--;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            document.body.appendChild(balloon);
+            balloon.style.left = Math.random() * window.innerWidth + "px";
+            balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            setTimeout(() => balloon.remove(), 5000);
         }
-        function createParticles(x, y) {
-            const colors = ["red", "yellow", "orange", "white"];
-            for (let i = 0; i < 50; i++) {
-                let color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color));
-            }
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
-                p.update();
-                p.draw();
-                if (p.life <= 0) {
-                    particles.splice(i, 1);
-                }
-            });
-            requestAnimationFrame(animate);
-        }
-        canvas.addEventListener("click", (e) => {
-            createParticles(e.clientX, e.clientY);
-        });
-        animate();
+        setInterval(createBalloon, 500);
     </script>
 </body>
 </html>
