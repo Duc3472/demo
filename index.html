@@ -1,31 +1,31 @@
 import { motion } from "framer-motion";
 
-export default function WomensDayAnimation() {
+export default function WomenDayAnimation() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-200 p-4">
-      <motion.h1
-        className="text-4xl font-bold text-pink-600 mb-4"
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
+      <motion.img
+        src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/fb8c49b5-c167-4067-a14d-1af8a224dcac.jpg"
+        alt="Happy Women's Day"
+        className="w-80 h-auto rounded-2xl shadow-lg"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        Chúc Mừng Ngày 8/3! 🎉
-      </motion.h1>
-      <motion.img
-        src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/tải xuống.jpg"
-        alt="Chúc mừng ngày 8/3"
-        className="w-64 h-64 rounded-lg shadow-lg"
+        transition={{ duration: 1.5 }}
+      />
+      <motion.h1
+        className="mt-6 text-4xl font-bold text-pink-600"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      />
+        transition={{ duration: 1.5, delay: 0.5 }}
+      >
+        Chúc Mừng Ngày Quốc Tế Phụ Nữ 8/3!
+      </motion.h1>
       <motion.p
-        className="text-lg text-pink-700 mt-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        className="mt-2 text-lg text-gray-700 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        Chúc các chị em phụ nữ một ngày thật vui vẻ và hạnh phúc! ❤️
+        Chúc các chị em luôn vui vẻ, hạnh phúc và thành công trong cuộc sống!
       </motion.p>
     </div>
   );
