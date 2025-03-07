@@ -1,31 +1,31 @@
 import { motion } from "framer-motion";
 
-export default function WomenDayAnimation() {
+export default function WomensDayAnimation() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-pink-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-200 p-4">
       <motion.h1
-        className="text-4xl font-bold text-pink-600"
+        className="text-4xl font-bold text-pink-600 mb-4"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Chúc mừng ngày 8/3! 🎉
+        Chúc Mừng Ngày 8/3! 🎉
       </motion.h1>
       <motion.img
         src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/tải xuống.jpg"
-        alt="Happy Women's Day"
-        className="w-60 h-60 mt-4 rounded-lg shadow-lg"
+        alt="Chúc mừng ngày 8/3"
+        className="w-64 h-64 rounded-lg shadow-lg"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 1, delay: 0.5 }}
       />
       <motion.p
         className="text-lg text-pink-700 mt-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1, delay: 1 }}
       >
-        Chúc một ngày tuyệt vời, tràn ngập niềm vui và hạnh phúc! 💖
+        Chúc các chị em phụ nữ một ngày thật vui vẻ và hạnh phúc! ❤️
       </motion.p>
     </div>
   );
