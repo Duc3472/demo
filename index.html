@@ -3,77 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chúc Mừng 8/3</title>
+    <title>Chúc mừng 8/3</title>
     <style>
         body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background-color: #ffe4e1;
-            text-align: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #ffe6f2;
             font-family: Arial, sans-serif;
-            overflow: hidden;
+        }
+        h1 {
+            color: #ff1493;
+            font-size: 36px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .image-container {
+            margin-top: 20px;
+            animation: bounce 2s infinite;
         }
         img {
             width: 300px;
-            border-radius: 15px;
+            height: auto;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s ease-in-out, bounce 3s infinite alternate;
-        }
-        h1 {
-            color: #e91e63;
-            font-size: 2em;
-            margin-top: 20px;
-            animation: slideIn 1.5s ease-in-out;
-        }
-        p {
-            color: #555;
-            font-size: 1.2em;
-            margin-top: 10px;
-            animation: fadeIn 3s ease-in-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
-        }
-        .floating-heart {
-            position: absolute;
-            color: #e91e63;
-            font-size: 24px;
-            animation: floatUp 5s linear infinite;
-        }
-        @keyframes floatUp {
-            from { transform: translateY(100vh); opacity: 1; }
-            to { transform: translateY(-10vh); opacity: 0; }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/fb8c49b5-c167-4067-a14d-1af8a224dcac.jpg" alt="Happy Women's Day">
-    <h1>Chúc Mừng Ngày Quốc Tế Phụ Nữ 8/3!</h1>
-    <p>Chúc các chị em luôn vui vẻ, hạnh phúc và thành công trong cuộc sống!</p>
-    
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.innerHTML = '❤';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
-        setInterval(createHeart, 500);
-    </script>
+    <h1>Chúc chị yêu ngày 8/3 vui vẻ và hạnh phúc! 💖</h1>
+    <div class="image-container">
+        <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/480818573_3366370796831678_366753129092660976_n.jpg" alt="Hình ảnh chúc mừng">
+    </div>
 </body>
 </html>
