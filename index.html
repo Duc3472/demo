@@ -13,15 +13,15 @@
             flex-direction: column;
             background-color: #ffe6f2;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
         h1 {
             color: #ff1493;
             font-size: 36px;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeIn 2s ease-in-out, colorChange 3s infinite alternate;
         }
         .image-container {
             margin-top: 20px;
-            animation: bounce 2s infinite;
         }
         img {
             width: 300px;
@@ -33,9 +33,29 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes colorChange {
+            from { color: #ff1493; }
+            to { color: #ff4500; }
+        }
+        .flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .flower {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: url('https://cdn-icons-png.flaticon.com/512/482/482154.png') no-repeat center/contain;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -44,5 +64,23 @@
     <div class="image-container">
         <img src="https://ephemeral-biscochitos-ec9d32.netlify.app/static/480818573_3366370796831678_366753129092660976_n.jpg" alt="Hình ảnh chúc mừng">
     </div>
+    <div class="flowers"></div>
+    <script>
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            document.querySelector(".flowers").appendChild(flower);
+            
+            const startPosition = Math.random() * window.innerWidth;
+            const duration = Math.random() * 3 + 2;
+            flower.style.left = `${startPosition}px`;
+            flower.style.animationDuration = `${duration}s`;
+            
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+        setInterval(createFlower, 300);
+    </script>
 </body>
 </html>
